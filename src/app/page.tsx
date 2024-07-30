@@ -42,7 +42,7 @@ const HomePage = ({}) => {
 
   return (
     <div className="max-h-screen overflow-y-auto">
-      <button onClick={() => addAll(productsItems)}>add all </button>
+      {/* <button onClick={() => addAll(productsItems)}>add all </button> */}
 
       <Modal
         isOpen={ModalStore.modalName === modals.login}
@@ -59,12 +59,12 @@ const HomePage = ({}) => {
       >
         <ProductCardView pageName={"home"} />
       </Modal>
-      <Modal
+      {/* <Modal
         isOpen={ModalStore.modalName === modals.addProduct}
         closeModal={ModalStore.closeModal}
       >
         <AddProductForm />
-      </Modal>
+      </Modal> */}
       <Modal
         isOpen={ModalStore.modalName === modals.editProduct}
         closeModal={ModalStore.closeModal}

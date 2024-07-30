@@ -88,12 +88,12 @@ const ProductCardView: React.FC<ProductCardView> = ({ pageName }) => {
       </div>
       {authStore.isLoggedIn && (
         <div className="w-full flex justify-between items-center">
-          <button
+          {/* <button
             onClick={handleRemove}
             className="flex items-center bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
           >
             מחק
-          </button>
+          </button> */}
           <button
             onClick={() => {
               ModalStore.openModal(modals.editProduct);
