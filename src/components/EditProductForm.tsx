@@ -37,17 +37,10 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
     });
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null;
-    setUpdatedProduct({
-      ...updatedProduct,
-      image: file,
-    });
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      console.log(toJS(updatedProduct));
       const updatedProd = await updateProductApi(updatedProduct);
       if (!updatedProd) throw new Error("product updated is null");
       productStore.updateProduct(updatedProd);
@@ -63,6 +56,20 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
         messageStore.setMessage("An unknown error occurred", "error");
       }
     }
+  };
+
+  const handleChangeSize = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+
+    console.log({ name, value });
+    setUpdatedProduct({
+      ...updatedProduct,
+      size: { ...updatedProduct.size, [name]: value },
+    });
   };
 
   return (
@@ -87,10 +94,12 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
           Image
         </label>
         <input
-          type="file"
-          id="image"
-          name="image"
-          onChange={handleFileChange}
+          disabled
+          type="text"
+          id="imageUrl"
+          name="imageUrl"
+          // onChange={handleChange}
+          value={product.imageUrl}
           className="w-full px-3 py-2 border rounded-md"
         />
         <Image
@@ -147,7 +156,37 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
           required
         />
       </div>
-
+      <div className="mb-4">
+        <label htmlFor="size" className="block text-gray-700 font-bold mb-2">
+          size - w - h
+        </label>
+        <div className="flex items-center gap-4">
+          {/* <span>widht X height</span> */}
+          <input
+            type="number"
+            id="width"
+            name="width"
+            max={200}
+            min={10}
+            value={updatedProduct.size.width}
+            onChange={handleChangeSize}
+            className="w-14 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+            required
+          />
+          X
+          <input
+            type="number"
+            id="height"
+            name="height"
+            max={200}
+            min={10}
+            value={updatedProduct.size.height}
+            onChange={handleChangeSize}
+            className=" w-14 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+            required
+          />
+        </div>
+      </div>
       <div className="flex justify-end">
         <button
           type="submit"

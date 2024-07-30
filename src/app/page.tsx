@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 
 import type { NextPage } from "next";
 import MainSection from "../components/MainSection";
@@ -17,7 +18,8 @@ import AddProductForm from "@/components/AddProductForm";
 import EditProductForm from "@/components/EditProductForm";
 import authStore from "@/mobx/authStore";
 import { getProductsApi } from "@/api/product/get";
-import { useEffect, useState } from "react";
+import { toJS } from "mobx";
+import { addAll } from "@/api/product/addAll";
 const HomePage = ({}) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -26,6 +28,8 @@ const HomePage = ({}) => {
       try {
         const products = await getProductsApi();
         productStore.setProducts(products || []);
+
+        console.log({ products: toJS(productStore.products) });
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -38,6 +42,8 @@ const HomePage = ({}) => {
 
   return (
     <div className="max-h-screen overflow-y-auto">
+      <button onClick={() => addAll(productsItems)}>add all </button>
+
       <Modal
         isOpen={ModalStore.modalName === modals.login}
         closeModal={ModalStore.closeModal}

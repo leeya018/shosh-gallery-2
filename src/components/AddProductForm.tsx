@@ -12,10 +12,14 @@ import React, { useState } from "react";
 const AddProductForm: React.FC = () => {
   const [product, setProduct] = useState<Product>({
     name: "pic",
-    image: null,
+    imageUrl: "",
     price: 1,
     currency: "ILS",
     description: "pic desc",
+    size: {
+      width: 40,
+      height: 40,
+    },
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -68,6 +72,19 @@ const AddProductForm: React.FC = () => {
     }
   };
 
+  const handleChangeSize = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+
+    setProduct({
+      ...product,
+      size: { ...product.size, [name]: value },
+    });
+  };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -92,20 +109,20 @@ const AddProductForm: React.FC = () => {
           Image
         </label>
         <input
-          type="file"
-          id="image"
-          name="image"
-          onChange={handleFileChange}
+          type="text"
+          id="imageUrl"
+          name="imageUrl"
+          onChange={handleChange}
+          value={product.imageUrl}
           className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
           required
         />
         <Image
           alt="product image1"
-          // layout="fill"
           width={100}
           height={100}
           className=" bg-center object-cover "
-          src={product.image ? URL.createObjectURL(product.image) : ""}
+          src={product.imageUrl ? product.imageUrl : ""}
         />
       </div>
       <div className="mb-4">
@@ -157,6 +174,31 @@ const AddProductForm: React.FC = () => {
           className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
           required
         />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="size" className="block text-gray-700 font-bold mb-2">
+          size
+        </label>
+        <div className="flex items-center gap-3">
+          {/* <span>widht X height</span> */}
+          <input
+            id="width"
+            name="width"
+            value={product.size.width}
+            onChange={handleChangeSize}
+            className=" py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+            required
+          />
+          X
+          <input
+            id="height"
+            name="height"
+            value={product.size.height}
+            onChange={handleChangeSize}
+            className=" py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+            required
+          />
+        </div>
       </div>
       <div className="flex justify-center">
         <button

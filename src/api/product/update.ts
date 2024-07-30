@@ -5,22 +5,10 @@ import { Product } from "./interfaces";
 
 export const updateProductApi = async (product: Product) => {
   try {
-    let imageUrl = product.imageUrl;
-    // Upload new image to Firebase Storage if provided
-    if (product.image) {
-      const storageRef = ref(storage, `products/${product.image.name}`);
-      const snapshot = await uploadBytes(storageRef, product.image);
-      imageUrl = await getDownloadURL(snapshot.ref);
-    }
-
     // Update product in Firestore
     const productRef = doc(db, "products", product.id!);
     await updateDoc(productRef, {
-      name: product.name,
-      imageUrl: imageUrl,
-      price: product.price,
-      currency: product.currency,
-      description: product.description,
+      ...product,
       updatedAt: new Date(),
     });
 

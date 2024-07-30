@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",
-    "@paypal/react-paypal-js": "^8.3.0",
     "@types/node-fetch": "^2.6.11",
     "axios": "^1.7.2",
     "firebase": "^10.7.0",
