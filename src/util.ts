@@ -16,6 +16,28 @@ export const currencies: Record<string, string> = {
 
 export const productsItems: Product[] = [
   {
+    name: "1שלום",
+    imageUrl: "/images/pics/IMG_1756.jpg",
+    price: 150,
+    currency: "ILS",
+    description: "שלום.",
+    size: {
+      width: 40,
+      height: 40,
+    },
+  },
+  {
+    name: "2שלום",
+    imageUrl: "/images/pics/IMG_1759.jpg",
+    price: 150,
+    currency: "ILS",
+    description: "שלום.",
+    size: {
+      width: 40,
+      height: 40,
+    },
+  },
+  {
     name: "שלום",
     imageUrl: "/images/pics/IMG_1743.jpg",
     price: 150,
@@ -239,6 +261,28 @@ export const productsItems: Product[] = [
   {
     name: "שלום",
     imageUrl: "/images/pics/IMG_1777.jpg",
+    price: 150,
+    currency: "ILS",
+    description: "שלום.",
+    size: {
+      width: 40,
+      height: 40,
+    },
+  },
+  {
+    name: "3שלום",
+    imageUrl: "/images/pics/IMG_1748.jpg",
+    price: 150,
+    currency: "ILS",
+    description: "שלום.",
+    size: {
+      width: 40,
+      height: 40,
+    },
+  },
+  {
+    name: "4שלום",
+    imageUrl: "/images/pics/IMG_1749.jpg",
     price: 150,
     currency: "ILS",
     description: "שלום.",
