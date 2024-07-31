@@ -12,6 +12,7 @@ import Image from "next/image";
 import React from "react";
 import AddButton from "./AddButton";
 import cartStore from "@/mobx/cartStore";
+import OriginalSizeImage from "./OriginalSizeImage";
 
 type ProductCardView = {
   pageName: string;
@@ -62,13 +63,17 @@ const ProductCardView: React.FC<ProductCardView> = ({ pageName }) => {
   };
   console.log({ imageUrl });
   return (
-    <div className=" mx-2  my-5 rounded-xl  bg-card-gradient cursor-pointer ">
+    <div className=" mx-2  my-5 rounded-xl  bg-card-gradient cursor-pointer overflow-y-auto ">
       <div className=" relative w-full h-[60vh]">
-        <Image
+        {/* <Image
           alt={name + "תמונה של"}
           src={imageUrl ? imageUrl : "/"}
           layout="fill"
           className=" bg-center object-cover "
+        /> */}
+        <OriginalSizeImage
+          src={imageUrl ? imageUrl : "/"}
+          alt={name + "תמונה של"}
         />
       </div>
       <div className="my-4 px-5 py-2 text-white">
