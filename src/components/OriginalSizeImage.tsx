@@ -12,6 +12,7 @@ const OriginalSizeImage = ({ src, alt }: OriginalSizeImageProps) => {
     img.src = src;
     img.onload = () => {
       setDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+      //   setDimensions({ width: img.naturalWidth, height: img.naturalHeight });
     };
   }, [src]);
 
