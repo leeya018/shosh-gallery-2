@@ -19,7 +19,7 @@ interface ProductProps {
 }
 
 const ProductCard: React.FC<ProductProps> = ({ product, pageName }) => {
-  const { id, name, imageUrl, price, currency, description } = product;
+  const { id, name, imageUrl, price, size, currency, description } = product;
 
   console.log({ pageName });
 
@@ -40,7 +40,7 @@ const ProductCard: React.FC<ProductProps> = ({ product, pageName }) => {
   // );
   return (
     <div
-      className=" mx-2  my-5 rounded-xl  bg-card-gradient cursor-pointer "
+      className=" mx-2  my-5 rounded-xl text-right  bg-card-gradient cursor-pointer h-[28rem] flex flex-col "
       onClick={handleClick}
     >
       <div className=" relative w-full h-64">
@@ -66,14 +66,19 @@ const ProductCard: React.FC<ProductProps> = ({ product, pageName }) => {
         <h3 className="text-lg font-semibold mb-2 whitespace-normal  ">
           מחיר : {price}
         </h3>
+        <h3 className="text-lg font-semibold mb-2 whitespace-normal  ">
+          <p>
+            {size.width} X {size.height}
+          </p>
+        </h3>
       </div>
       {pageName === "home" && !authStore.isLoggedIn && (
         <button
           onClick={addToCart}
           disabled={isExists}
           className={`${
-            isExists ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-600"
-          } flex items-center  text-white px-4 py-2 rounded-md `}
+            isExists ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-600  "
+          } flex items-center justify-center  text-white px-4 py-2 rounded-md mt-auto m-2 `}
         >
           {isExists ? "הוסף לעגלה" : "הכנס לעגלה"}
         </button>
@@ -84,7 +89,7 @@ const ProductCard: React.FC<ProductProps> = ({ product, pageName }) => {
             if (!product.id) throw new Error("id not exists");
             cartStore.removeItem(product.id);
           }}
-          className="bg-red-500 flex items-center  text-white px-4 py-2 rounded-md cursor-pointer"
+          className="bg-red-500 flex items-center m-2 justify-center   text-white px-4 py-2 rounded-md cursor-pointer mt-auto"
         >
           הסר מהעגלה{" "}
         </button>

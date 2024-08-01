@@ -75,7 +75,7 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="name" className="block text-gray-700">
+        <label htmlFor="name" className="block text-white">
           Name
         </label>
         <input
@@ -90,7 +90,7 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
       </div>
 
       <div>
-        <label htmlFor="image" className="block text-gray-700">
+        <label htmlFor="image" className="block text-white">
           Image
         </label>
         <input
@@ -152,7 +152,7 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
           name="description"
           value={updatedProduct.description}
           onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-md"
+          className="w-full px-3 py-2 border rounded-md "
           required
         />
       </div>

@@ -63,8 +63,8 @@ const ProductCardView: React.FC<ProductCardView> = ({ pageName }) => {
   };
   console.log({ imageUrl });
   return (
-    <div className=" mx-2  my-5 rounded-xl  bg-card-gradient cursor-pointer overflow-y-auto ">
-      <div className=" relative w-full h-[60vh]">
+    <div className=" mx-2  my-5 rounded-xl  bg-card-gradient  text-right  ">
+      <div className=" relative w-full ">
         {/* <Image
           alt={name + "תמונה של"}
           src={imageUrl ? imageUrl : "/"}
@@ -81,14 +81,15 @@ const ProductCardView: React.FC<ProductCardView> = ({ pageName }) => {
           {name}
         </h3>
         <h3 className="text-lg font-semibold mb-2 whitespace-normal  ">
-          מחיר : {price} {currency}
+          מחיר : {price} שקלים
         </h3>
         <h3 className="text-lg font-semibold mb-2 whitespace-normal  ">
+          <p>
+            {size.width} X {size.height}
+          </p>
+        </h3>
+        <h3 className="text-lg mt-4 font-semibold mb-2  whitespace-pre-wrap ">
           {description}
-        </h3>
-        <h3 className="text-lg font-semibold mb-2 whitespace-normal  ">
-          {/*  מידות ( אורך על רוחב) : */}
-          {size.width} X {size.height}
         </h3>
       </div>
       {authStore.isLoggedIn && (

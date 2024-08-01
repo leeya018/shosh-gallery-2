@@ -9,12 +9,13 @@ import { signOut } from "firebase/auth";
 import { auth } from "@/firebaseConfig";
 import { observer } from "mobx-react-lite";
 import Image from "next/image";
-import { FaCartShopping } from "react-icons/fa6";
+import { FaCartShopping, FaBars } from "react-icons/fa6";
 import cartStore from "@/mobx/cartStore";
 import { useRouter } from "next/navigation";
 
 const Header = observer(() => {
   const [activeTab, setActiveTab] = useState("home");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
 
   const logout = async () => {
@@ -32,8 +33,8 @@ const Header = observer(() => {
   };
 
   return (
-    <header className="flex justify-between items-center px-6 py-2 bg-white  shadow-md">
-      <div className="logo flex items-center justify-center w-full md:w-auto">
+    <header className="flex justify-between items-center px-6 py-2 bg-white shadow-md">
+      <div className="logo flex items-center">
         <Image
           alt="logo"
           width={70}
@@ -42,66 +43,75 @@ const Header = observer(() => {
           className="bg-center object-cover rounded-full w-[70px] h-[70px]"
         />
       </div>
-      <li
-        onClick={() => setActiveTab("cart")}
-        className={`relative underline ${
-          activeTab === "home" && "underline"
-        } text-gray-700 hover:underline`}
-      >
-        <Link href="/cart">
-          <span className="underline text-black">
-            <FaCartShopping
-              size={30}
-              className="text-gray-700 hover:text-gray-900"
-            />
-            {cartStore.items?.length > 0 && (
-              <span className="absolute top-0 right-0  w-6 h-6 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
-                {cartStore.items?.length}
-              </span>
-            )}
-          </span>
-        </Link>
-      </li>
 
-      <nav>
-        <ul className="flex space-x-6">
-          <li onClick={() => setActiveTab("home")}>
-            <Link href="/">
-              <span
-                className={`${
-                  activeTab === "home" && "underline"
-                } text-gray-700 hover:underline`}
-              >
-                בית
+      <div className="md:hidden">
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="text-gray-700"
+        >
+          <FaBars size={30} />
+        </button>
+      </div>
+
+      {/*  sceond small  */}
+      <div
+        className={`md:flex ${
+          isMobileMenuOpen ? "flex" : "hidden"
+        } md:items-center md:space-x-6 gap-0 md:gap-5 flex-col md:flex-row absolute md:static bg-white w-full md:w-auto top-16 md:top-auto left-0 md:left-auto`}
+      >
+        <li
+          onClick={() => setActiveTab("home")}
+          className="w-full  text-center py-2 border-b md:border-0 list-none md:order-2"
+        >
+          <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+            <span className="text-gray-700 hover:underline">בית</span>
+          </Link>
+        </li>
+        <li
+          onClick={() => setActiveTab("cart")}
+          className="relative w-full flex justify-center items-center text-center py-2 border-b md:border-0 md:order-1"
+        >
+          <Link href="/cart" onClick={() => setIsMobileMenuOpen(false)}>
+            <div className="relative w-14 h-14 flex justify-center items-center">
+              <FaCartShopping
+                size={30}
+                className="text-gray-700 hover:text-gray-900 mx-auto"
+              />
+              {cartStore.items?.length > 0 && (
+                <span className="absolute top-0 right-0 w-6 h-6 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+                  {cartStore.items?.length}
+                </span>
+              )}
+            </div>
+          </Link>
+        </li>
+
+        <div className="py-2 w-full text-center md:order-3">
+          {authStore.isLoggedIn ? (
+            <div>
+              <span className="block md:inline-block mr-2">
+                שלום, {authStore.user?.displayName || authStore.user?.email}
               </span>
-            </Link>
-          </li>
-        </ul>
-      </nav>
-      <div>
-        {authStore.isLoggedIn ? (
-          <div>
-            <span className="mr-2">
-              שלום, {authStore.user?.displayName || authStore.user?.email}
-            </span>
+              <button
+                onClick={logout}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
+              >
+                יציאה
+              </button>
+            </div>
+          ) : (
             <button
-              onClick={logout}
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                router.push("/");
+                ModalStore.openModal(modals.login);
+              }}
               className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
             >
-              יציאה
+              כניסה
             </button>
-          </div>
-        ) : (
-          <button
-            onClick={() => {
-              router.push("/");
-              ModalStore.openModal(modals.login);
-            }}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
-          >
-            כניסה
-          </button>
-        )}
+          )}
+        </div>
       </div>
     </header>
   );

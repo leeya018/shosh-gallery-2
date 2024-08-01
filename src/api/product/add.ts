@@ -12,19 +12,10 @@ import { Product } from "./interfaces";
 
 export const addProductApi = async (product: Product) => {
   try {
-    let imageUrl = "";
-
-    // Upload image to Firebase Storage
-    if (product.image) {
-      const storageRef = ref(storage, `products/${product.image.name}`);
-      const snapshot = await uploadBytes(storageRef, product.image);
-      imageUrl = await getDownloadURL(snapshot.ref);
-    }
-
     // Add product to Firestore
     const docRef = await addDoc(collection(db, "products"), {
       name: product.name,
-      imageUrl: imageUrl,
+      imageUrl: product.imageUrl,
       price: product.price,
       currency: product.currency,
       description: product.description,
