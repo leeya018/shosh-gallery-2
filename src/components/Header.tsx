@@ -33,7 +33,7 @@ const Header = observer(() => {
   };
 
   return (
-    <header className="flex justify-between items-center px-6 py-2 bg-white shadow-md">
+    <header className="z-50 flex justify-between items-center px-6 py-2  shadow-md">
       <div className="logo flex items-center">
         <Image
           alt="logo"
@@ -47,7 +47,7 @@ const Header = observer(() => {
       <div className="md:hidden">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="text-gray-700"
+          className="text-white"
         >
           <FaBars size={30} />
         </button>
@@ -55,16 +55,16 @@ const Header = observer(() => {
 
       {/*  sceond small  */}
       <div
-        className={`md:flex ${
+        className={`md:flex z-50 md:z-auto ${
           isMobileMenuOpen ? "flex" : "hidden"
-        } md:items-center md:space-x-6 gap-0 md:gap-5 flex-col md:flex-row absolute md:static bg-white w-full md:w-auto top-16 md:top-auto left-0 md:left-auto`}
+        } md:items-center md:space-x-6 gap-0 md:gap-5 flex-col md:flex-row absolute md:static w-full md:w-auto top-16 md:top-auto left-0 md:left-auto`}
       >
         <li
           onClick={() => setActiveTab("home")}
           className="w-full  text-center py-2 border-b md:border-0 list-none md:order-2"
         >
           <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-            <span className="text-gray-700 hover:underline">בית</span>
+            <span className="text-white hover:underline">בית</span>
           </Link>
         </li>
         <li
@@ -75,7 +75,7 @@ const Header = observer(() => {
             <div className="relative w-14 h-14 flex justify-center items-center">
               <FaCartShopping
                 size={30}
-                className="text-gray-700 hover:text-gray-900 mx-auto"
+                className="text-white hover:text-gray-300 mx-auto"
               />
               {cartStore.items?.length > 0 && (
                 <span className="absolute top-0 right-0 w-6 h-6 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
@@ -86,10 +86,11 @@ const Header = observer(() => {
           </Link>
         </li>
 
-        <div className="py-2 w-full text-center md:order-3">
+        <div className="py-2 w-full text-center md:order-3 z-50 ">
           {authStore.isLoggedIn ? (
-            <div>
-              <span className="block md:inline-block mr-2">
+            <div className="md:flex md:flex-row md:items-center md:w-44">
+              {/* <span className="block md:inline-block mr-2"> */}
+              <span className="flex">
                 שלום, {authStore.user?.displayName || authStore.user?.email}
               </span>
               <button

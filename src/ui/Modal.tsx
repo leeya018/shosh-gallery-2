@@ -37,15 +37,16 @@ function Modal({ isOpen, closeModal, children }: ModalProps) {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel
-                className="w-[90vw] md:w-[70vw] lg:w-[50vw] rounded-md 
+                className="w-[90vw] md:w-[70vw] lg:w-[50vw]  
               max-w-full transform overflow-hidden  bg-card-gradient p-6 text-left align-middle shadow-xl transition-all"
               >
-                <button
+                <div
                   onClick={closeModal}
-                  className="absolute top-2 right-2 text-white hover:text-gray-300  text-3xl"
+                  className="absolute top-2 right-2 border-none text-white cursor-pointer text-2xl"
                 >
-                  x
-                </button>
+                  X
+                </div>
+
                 {children}
               </Dialog.Panel>
             </Transition.Child>

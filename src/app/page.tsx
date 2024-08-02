@@ -78,11 +78,11 @@ const HomePage = ({}) => {
       </Modal>
 
       <Message />
-      {authStore.isLoggedIn && (
+      {/* {authStore.isLoggedIn && (
         <div className="w-screen flex justify-center ">
           <AddButton />
         </div>
-      )}
+      )} */}
 
       <MainSection />
       <ProductList

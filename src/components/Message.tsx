@@ -9,12 +9,12 @@ const Message: React.FC = observer(() => {
     if (messageStore.message) {
       const timer = setTimeout(() => {
         messageStore.clearMessage();
-      }, 3000);
+      }, 1000);
 
       // Clean up the timer on component unmount or when message changes
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [messageStore.message]);
 
   if (!messageStore.message) return null;
 

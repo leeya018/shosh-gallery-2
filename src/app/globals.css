@@ -19,5 +19,6 @@
   background-size: cover;
   background-position: center;
   background: 0.05; /* Adjust opacity as needed */
-  z-index: -1; /* Ensures the pseudo-element is behind the content */
+  z-index: -1;
+  /* Ensures the pseudo-element is behind the content */
 }
