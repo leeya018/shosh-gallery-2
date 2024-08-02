@@ -33,7 +33,7 @@ const Header = observer(() => {
   };
 
   return (
-    <header className="z-50 flex justify-between items-center px-6 py-2  shadow-md">
+    <header className="z-50 flex justify-between items-center px-6 py-2  shadow-md md:text-xl">
       <div className="logo flex items-center">
         <Image
           alt="logo"
@@ -55,21 +55,21 @@ const Header = observer(() => {
 
       {/*  sceond small  */}
       <div
-        className={`md:flex z-50 md:z-auto ${
+        className={`md:flex z-50 md:z-auto  ${
           isMobileMenuOpen ? "flex" : "hidden"
         } md:items-center md:space-x-6 gap-0 md:gap-5 flex-col md:flex-row absolute md:static w-full md:w-auto top-16 md:top-auto left-0 md:left-auto`}
       >
         <li
           onClick={() => setActiveTab("home")}
-          className="w-full  text-center py-2 border-b md:border-0 list-none md:order-2"
+          className="w-full  text-center border-b md:border-0 list-none md:order-2 bg-gray-700 md:bg-transparent bg-opacity-80  py-6 md:py-2"
         >
           <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-            <span className="text-white hover:underline">בית</span>
+            <span className="text-white hover:underline ">בית</span>
           </Link>
         </li>
         <li
           onClick={() => setActiveTab("cart")}
-          className="relative w-full flex justify-center items-center text-center py-2 border-b md:border-0 md:order-1"
+          className="relative w-full flex justify-center items-center text-center py-2 border-b md:border-0 md:order-1 bg-gray-700 md:bg-transparent bg-opacity-80 "
         >
           <Link href="/cart" onClick={() => setIsMobileMenuOpen(false)}>
             <div className="relative w-14 h-14 flex justify-center items-center">
@@ -86,11 +86,11 @@ const Header = observer(() => {
           </Link>
         </li>
 
-        <div className="py-2 w-full text-center md:order-3 z-50 ">
+        <div className="py-2 w-full text-center md:order-3 z-50  bg-gray-700 md:bg-transparent bg-opacity-80 ">
           {authStore.isLoggedIn ? (
-            <div className="md:flex md:flex-row md:items-center md:w-44">
+            <div className="md:flex md:flex-row md:items-center md:w-56 md:gap-4">
               {/* <span className="block md:inline-block mr-2"> */}
-              <span className="flex">
+              <span className="flex text-white">
                 שלום, {authStore.user?.displayName || authStore.user?.email}
               </span>
               <button

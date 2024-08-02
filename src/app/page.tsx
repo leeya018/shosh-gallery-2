@@ -20,6 +20,7 @@ import authStore from "@/mobx/authStore";
 import { getProductsApi } from "@/api/product/get";
 import { toJS } from "mobx";
 import { addAll } from "@/api/product/addAll";
+
 const HomePage = ({}) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -42,7 +43,12 @@ const HomePage = ({}) => {
 
   return (
     <div className="max-h-screen overflow-y-auto">
-      {/* <button onClick={() => addAll(productsItems)}>add all </button> */}
+      {/* <button
+        className="border-white bg-blue-600"
+        onClick={() => addAll(productsItems)}
+      >
+        add all{" "}
+      </button> */}
 
       <Modal
         isOpen={ModalStore.modalName === modals.login}
@@ -59,12 +65,12 @@ const HomePage = ({}) => {
       >
         <ProductCardView pageName={"home"} />
       </Modal>
-      {/* <Modal
+      <Modal
         isOpen={ModalStore.modalName === modals.addProduct}
         closeModal={ModalStore.closeModal}
       >
         <AddProductForm />
-      </Modal> */}
+      </Modal>
       <Modal
         isOpen={ModalStore.modalName === modals.editProduct}
         closeModal={ModalStore.closeModal}

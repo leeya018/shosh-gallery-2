@@ -7,7 +7,7 @@ export const getProductsApi = async (): Promise<Product[] | undefined> => {
     const productsCollection = collection(db, "products");
     const productsQuery = query(
       productsCollection,
-      orderBy("createdAt", "desc")
+      orderBy("createdAt", "asc")
     );
     const querySnapshot = await getDocs(productsQuery);
 
