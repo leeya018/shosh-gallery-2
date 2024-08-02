@@ -7,11 +7,11 @@ import cartStore from "@/mobx/cartStore";
 
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
-    firstName: "לי",
-    lastName: "יהב",
-    message: "שלום",
-    email: "leeyahav018@gmail.com",
-    phone: "0542226666",
+    firstName: "",
+    lastName: "",
+    message: "",
+    email: "",
+    phone: "",
     items: [],
   });
   const [isLoading, setIsLoading] = useState(false);
