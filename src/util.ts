@@ -291,3 +291,18 @@ export const productsItems: Product[] = [
     price: 1500,
   },
 ];
+
+export const handleWhatsAppClick = (message: string) => {
+  const phoneNumber = process.env.NEXT_PUBLIC_PHONE; // Ensure this is set in your .env file
+
+  if (phoneNumber) {
+    // Remove any special characters from the phone number
+    const cleanPhoneNumber = phoneNumber.replace(/\D/g, "");
+    const encodedMessage = encodeURIComponent(message);
+    const url = `https://api.whatsapp.com/send?phone=${cleanPhoneNumber}&text=${encodedMessage}&type=phone_number&app_absent=0`;
+
+    window.open(url, "_blank");
+  } else {
+    console.error("Phone number is not defined in environment variables");
+  }
+};
